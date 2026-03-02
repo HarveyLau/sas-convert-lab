@@ -1,0 +1,41 @@
+target_profile: python-bigquery
+principles:
+  - sql_first_for_heavy_transforms
+  - python_for_orchestration_and_light_logic
+  - explicit_dataset_project_region_config
+runtime_defaults:
+  python_version: "3.11+"
+  core_libraries:
+    - google-cloud-bigquery
+    - pandas
+    - dbt-core
+project_layout:
+  - sql/models/staging/
+  - sql/models/marts/
+  - src/orchestration/
+  - src/quality_checks/
+  - tests/
+pattern_mappings:
+  - sas_pattern: proc_sql_create_table
+    target_pattern: bigquery_cte_or_create_table_as_select
+    notes:
+      - pin_project_dataset_table_names
+      - avoid_select_star_in_final_models
+  - sas_pattern: data_step_transform
+    target_pattern: staged_sql_model_or_python_preprocess
+    notes:
+      - move_set_based_logic_to_sql
+      - keep_row_wise_logic_in_python_only_if_needed
+  - sas_pattern: macro_dynamic_sql
+    target_pattern: jinja_templated_sql_or_python_sql_builder
+    notes:
+      - document_rendered_sql_for_review
+      - validate_generated_table_targets
+  - sas_pattern: proc_append
+    target_pattern: insert_into_or_merge_statement
+    notes:
+      - define_dedup_and_upsert_keys
+validation_hints:
+  - validate_row_counts_by_partition
+  - validate_key_aggregate_metrics
+  - validate_schema_compatibility_and_nullable_rules

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Design Spec Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "target_profile",
+    "proposed_project_structure",
+    "module_contracts",
+    "data_contracts",
+    "runtime_and_config_assumptions",
+    "questions_for_user",
+    "assumptions",
+    "alignment_score"
+  ],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "target_profile": { "type": "string", "minLength": 1 },
+    "proposed_project_structure": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "module_contracts": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "data_contracts": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "runtime_and_config_assumptions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "questions_for_user": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "alignment_score": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    }
+  }
+}

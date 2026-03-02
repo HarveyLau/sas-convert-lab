@@ -1,0 +1,40 @@
+target_profile: python-pandas
+principles:
+  - prefer_readable_dataframe_ops
+  - isolate_io_from_transformations
+  - keep_column_lineage_comments_for_complex_steps
+runtime_defaults:
+  python_version: "3.11+"
+  core_libraries:
+    - pandas
+    - numpy
+    - pyarrow
+project_layout:
+  - src/io/
+  - src/transforms/
+  - src/jobs/
+  - tests/
+pattern_mappings:
+  - sas_pattern: data_step_set_merge
+    target_pattern: pandas_merge_or_concat
+    notes:
+      - define_join_keys_explicitly
+      - preserve_sort_assumptions_or_remove_dependency
+  - sas_pattern: proc_sql_create_table
+    target_pattern: pandas_query_or_merge_pipeline
+    notes:
+      - keep_sql_alias_lineage
+      - avoid_implicit_type_casting
+  - sas_pattern: macro_parameterized_logic
+    target_pattern: python_function_with_dataclass_config
+    notes:
+      - map_macro_vars_to_explicit_function_args
+      - persist_default_values_in_config
+  - sas_pattern: proc_sort_nodupkey
+    target_pattern: sort_values_then_drop_duplicates
+    notes:
+      - define_subset_columns_for_dedup
+validation_hints:
+  - compare_row_counts_per_step
+  - compare_null_ratio_on_business_columns
+  - compare_kpi_aggregates_with_tolerance

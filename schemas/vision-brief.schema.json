@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vision Brief",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "business_goal",
+    "target_profile",
+    "success_criteria",
+    "constraints",
+    "non_goals",
+    "stakeholders"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "business_goal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_profile": {
+      "type": "string",
+      "enum": ["python-pandas", "python-bigquery", "pyspark", "custom"]
+    },
+    "success_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "non_goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stakeholders": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

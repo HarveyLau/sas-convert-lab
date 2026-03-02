@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Open Questions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "questions"],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "stage", "question", "priority", "status"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "stage": {
+            "type": "string",
+            "enum": [
+              "discover",
+              "analyze",
+              "plan",
+              "design",
+              "convert",
+              "validate"
+            ]
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["open", "resolved", "deferred"]
+          }
+        }
+      }
+    }
+  }
+}
