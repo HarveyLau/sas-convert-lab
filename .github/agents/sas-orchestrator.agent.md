@@ -72,6 +72,8 @@ After each stage, produce a gate review with this exact structure:
 - Prefer decision-driving questions over informational trivia.
 - Ask in business + technical terms (data quality, SLA, cost, ownership, lineage).
 - Track unresolved questions into `open_questions.json`.
+- If question quality is weak, read `docs/stage-question-pack.md` and adapt
+  the closest stage question set to current context.
 
 ## Intent Memory Policy
 

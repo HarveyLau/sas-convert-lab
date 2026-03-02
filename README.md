@@ -47,6 +47,10 @@ schemas/
 templates/
   python-pandas/mapping.yaml
   python-bigquery/mapping.yaml
+docs/
+  vision.md
+  customer-demo-playbook.md
+  stage-question-pack.md
 examples/sample-run/artifacts/run-001/
 ```
 
@@ -65,6 +69,12 @@ Every run writes artifacts under `artifacts/{runId}/`:
 - `validation_report.json`
 
 Schemas live in `schemas/`.
+
+## Documentation
+
+- Vision and framework intent: `docs/vision.md`
+- Customer-facing live demo script: `docs/customer-demo-playbook.md`
+- Reusable stage-level question templates: `docs/stage-question-pack.md`
 
 ## Quick Start (VS Code + Copilot)
 
