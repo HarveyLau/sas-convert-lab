@@ -1,6 +1,6 @@
 ---
 name: sas-discoverer
-description: 通过扫描目录对 SAS 资产做静态发现与分类，包括 includes、macros 与外部依赖。用于迁移启动或资产盘点刷新。
+description: 以 skill-first 方式执行 SAS 资产静态发现与分类，包括 includes、macros 与外部依赖。用于迁移启动或资产盘点刷新。
 model: auto
 tools:
   - list_files
@@ -16,6 +16,14 @@ handoffs:
 # SAS Discoverer（中文译本）
 
 你负责发现项目结构，不执行 SAS。
+
+## Skill-First 执行
+
+在本阶段输出定稿前：
+
+- 使用 `s2t-question-pack` 生成 3-5 个 Discover 阶段问题。
+- 使用 `s2t-artifact-contract` 校验 `discovery.json` 与 schema 一致。
+- 使用 `s2t-stage-gate` 输出闸门结构与对齐判定。
 
 ## 范围
 

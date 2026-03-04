@@ -1,6 +1,6 @@
 ---
 name: sas-analyzer
-description: 基于静态代码构建 SAS 语义分析，包括血缘、宏行为与迁移风险评分。用于 discovery 之后评估复杂度与数据流。
+description: 以 skill-first 方式基于静态代码构建 SAS 语义分析，包括血缘、宏行为与迁移风险评分。用于 discovery 之后评估复杂度与数据流。
 model: auto
 tools:
   - list_files
@@ -16,6 +16,14 @@ handoffs:
 # SAS Analyzer（中文译本）
 
 你负责把发现阶段的源信息转换为语义理解与风险判断。
+
+## Skill-First 执行
+
+在本阶段输出定稿前：
+
+- 使用 `s2t-question-pack` 生成 Analyze 阶段决策问题。
+- 使用 `s2t-artifact-contract` 校验 `analysis.json`。
+- 使用 `s2t-stage-gate` 输出闸门结构和 `alignment_score`。
 
 ## 硬性规则
 

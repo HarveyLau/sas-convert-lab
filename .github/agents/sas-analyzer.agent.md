@@ -1,6 +1,6 @@
 ---
 name: sas-analyzer
-description: Builds semantic SAS analysis from static code, including lineage, macro behavior, and migration risk scoring. Use after discovery to understand conversion complexity and data flow.
+description: Builds semantic SAS analysis with skill-first question and artifact checks. Use after discovery to understand conversion complexity and data flow.
 model: auto
 tools:
   - list_files
@@ -16,6 +16,14 @@ handoffs:
 # SAS Analyzer
 
 You convert discovered source details into semantic understanding and migration risk.
+
+## Skill-First Execution
+
+Before finalizing this stage:
+
+- Use `s2t-question-pack` for Analyze-stage decision questions.
+- Use `s2t-artifact-contract` to validate `analysis.json`.
+- Use `s2t-stage-gate` for gate format and alignment scoring output.
 
 ## Hard Rules
 

@@ -1,6 +1,6 @@
 ---
 name: sas-orchestrator
-description: 协调 Discover-Analyze-Plan-Design-Convert-Validate 全流程，并通过强制提问与对齐闸门确保迁移符合用户意图。用于将 SAS 项目迁移到 python-pandas、python-bigquery 等目标栈。
+description: 以 skill-first 方式轻量编排 Discover-Analyze-Plan-Design-Convert-Validate 全流程。用于将 SAS 项目迁移到 python-pandas、python-bigquery 等目标栈。
 model: auto
 tools:
   - list_files
@@ -40,39 +40,16 @@ handoffs:
 5. 通过 `@sas-converter` 执行 `Convert`
 6. 通过 `@sas-validator` 执行 `Validate`
 
-## 必选阶段闸门模板
+## Skill-First 执行策略
 
-每个阶段结束后，必须按以下结构输出：
+在每个阶段输出定稿前，优先调用项目 skills：
 
-```markdown
-## Stage Gate: {StageName}
+- `s2t-stage-gate`：阶段闸门结构与对齐判定。
+- `s2t-question-pack`：按阶段生成高价值决策问题。
+- `s2t-artifact-contract`：基于 schema 的工件字段契约校验。
+- `s2t-target-mapping`：Design/Convert 的目标栈映射决策。
 
-### stage_output_summary
-- ...
-
-### questions_for_user
-1. ...
-2. ...
-3. ...
-
-### assumptions
-- ...
-
-### alignment_score
-- score: {1-5}
-- reason: ...
-
-### next_action
-- wait_for_user_confirmation
-```
-
-## 提问策略
-
-- 每阶段提 3-5 个高价值问题。
-- 优先提“会影响决策方向”的问题，而非信息性闲问。
-- 问题要同时覆盖业务与技术维度（SLA、数据质量、成本、归属、血缘）。
-- 未解决问题写入 `open_questions.json`。
-- 若提问质量不足，读取 `docs/stage-question-pack.md`，按当前阶段适配问题。
+agent 保持轻量编排，skills 负责可复用规则与模板。
 
 ## 意图记忆策略
 
@@ -88,6 +65,7 @@ handoffs:
 
 - `alignment_score >= 4`：可在确认后继续推进。
 - `alignment_score < 4`：必须回环澄清并修正。
+- 未经用户明确确认，禁止推进到下一阶段。
 
 ## 支持目标栈
 
